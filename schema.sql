@@ -203,7 +203,6 @@ CREATE TABLE Questions(
 -- they answered for each question, not what the correct answer for a question is
 CREATE TABLE Answer(
     answer_id               BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    attempt_id              BIGINT UNSIGNED NOT NULL,
     scenario_id             BIGINT UNSIGNED NOT NULL,
     question_id             BIGINT UNSIGNED NOT NULL,
     answer_text             TEXT NOT NULL,
@@ -215,13 +214,6 @@ CREATE TABLE Answer(
         attempt_id,
         question_id
     ),
-
-    -- These foreign keys ensure that the attempt and question
-    -- belong to the same scenario.
-    CONSTRAINT answers_attempt_fk
-        FOREIGN KEY (attempt_id, scenario_id)
-        REFERENCES Attempts (attempt_id, scenario_id)
-        ON DELETE RESTRICT,
 
     CONSTRAINT answers_question_fk
         FOREIGN KEY (scenario_id, question_id)
